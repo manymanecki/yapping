@@ -5,6 +5,13 @@
   "windows": ["main"],
   "permissions": [
     "core:default",
-    "opener:default"
+    "opener:default",
+    "core:window:allow-set-title",
+    {
+      "identifier": "core:event:default",
+      "allow": [
+        { "channel": "request-*" }
+      ]
+    }
   ]
 }
