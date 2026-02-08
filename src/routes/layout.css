@@ -119,3 +119,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Shiki dual-theme: light by default, dark under .dark scope */
+.shiki,
+.shiki span {
+  color: var(--shiki-light);
+  background-color: transparent !important;
+}
+
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark);
+}

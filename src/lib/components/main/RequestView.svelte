@@ -4,9 +4,9 @@
 	import * as Select from '$lib/components/ui/select/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
-	import { Separator } from '$lib/components/ui/separator/index.js';
 	import SendIcon from '@lucide/svelte/icons/send';
 	import LoaderCircleIcon from '@lucide/svelte/icons/loader-circle';
+	import ResponsePane from '$lib/components/response/ResponsePane.svelte';
 	import { tabStore } from '$lib/stores/tabs.svelte';
 	import { HTTP_METHODS, METHOD_COLORS } from '$lib/constants/http';
 	import type { HttpMethod } from '$lib/constants/http';
@@ -118,37 +118,7 @@
 		</Resizable.Pane>
 		<Resizable.Handle />
 		<Resizable.Pane defaultSize={50} minSize={20}>
-			<div class="flex h-full flex-col">
-				{#if error}
-					<div class="flex items-center gap-4 border-b px-4 py-2">
-						<span class="text-sm font-medium text-destructive">Error</span>
-					</div>
-					<div class="flex-1 overflow-auto p-4">
-						<p class="text-sm text-destructive">{error}</p>
-					</div>
-				{:else if tab.response}
-					<div class="flex items-center gap-4 border-b px-4 py-2">
-						<span class="text-sm font-medium">
-							Status: <span class="font-mono">{tab.response.status} {tab.response.statusText}</span>
-						</span>
-						<Separator orientation="vertical" class="h-4" />
-						<span class="text-sm text-muted-foreground">
-							{tab.response.timeMs}ms
-						</span>
-						<Separator orientation="vertical" class="h-4" />
-						<span class="text-sm text-muted-foreground">
-							{tab.response.sizeBytes} B
-						</span>
-					</div>
-					<div class="flex-1 overflow-auto p-4">
-						<pre class="text-sm">{tab.response.body}</pre>
-					</div>
-				{:else}
-					<div class="flex flex-1 items-center justify-center text-sm text-muted-foreground">
-						Send a request to see the response
-					</div>
-				{/if}
-			</div>
+			<ResponsePane response={tab.response} {loading} {error} />
 		</Resizable.Pane>
 	</Resizable.PaneGroup>
 </div>
